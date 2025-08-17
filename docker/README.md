@@ -5,8 +5,8 @@ A minimal FastAPI service with health & metrics endpoints, packaged via a multi-
 
 ## Run locally
 ```bash
-docker build -t devops-portfolio/demoapp:local .
-docker run --rm -p 8080:8080 devops-portfolio/demoapp:local
+docker build -t devops/demoapp:local .
+docker run --rm -p 8080:8080 devops/demoapp:local
 curl -s localhost:8080/ | jq
 curl -s localhost:8080/healthz
 ```
