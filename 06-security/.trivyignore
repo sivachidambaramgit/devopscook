@@ -1,0 +1,4 @@
+
+# Example Trivy ignore entries (review before using)
+# CVE-2023-12345
+# CVE-2024-99999

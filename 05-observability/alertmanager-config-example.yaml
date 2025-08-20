@@ -1,0 +1,11 @@
+
+route:
+  receiver: "slack"
+receivers:
+  - name: "slack"
+    slack_configs:
+      - send_resolved: true
+        api_url: "<SLACK_WEBHOOK_URL>"
+        channel: "#alerts"
+        title: "[{{ .Status | toUpper }}] {{ .CommonLabels.alertname }}"
+        text: "{{ range .Alerts }}• {{ .Annotations.summary }}\n{{ .Annotations.description }}\n{{ end }}"

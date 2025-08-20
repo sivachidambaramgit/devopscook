@@ -1,0 +1,24 @@
+
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: devops-portfolio-rules
+  namespace: monitoring
+spec:
+  groups:
+    - name: k8s-health
+      rules:
+        - alert: HighPodRestartRate
+          expr: increase(kube_pod_container_status_restarts_total[5m]) > 3
+          for: 5m
+          labels: { severity: warning }
+          annotations:
+            summary: "High pod restarts"
+            description: "Pod is restarting frequently in the last 5 minutes."
+        - alert: KubeAPIServerDown
+          expr: up{job="kube-apiserver"} == 0
+          for: 3m
+          labels: { severity: critical }
+          annotations:
+            summary: "Kubernetes API server down"
+            description: "APIServer has been unreachable for 3 minutes."
